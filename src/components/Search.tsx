@@ -26,8 +26,13 @@ const InputContainer = styled.label`
 
 const Input = styled.input.attrs({
   type: 'input',
-  placeHolder: 'Search for a country...',
-})``;
+  placeholder: 'Search for a country...',
+})`
+  border: none;
+  outline: none;
+  margin-left: 2rem;
+  color: var(--colors-text);
+`;
 
 export default function Search({ search, setSearch }: SearchProps) {
   return (
