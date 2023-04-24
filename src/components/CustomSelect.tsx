@@ -1,20 +1,7 @@
 import styled from 'styled-components';
-import Select, { CSSObjectWithLabel, ControlProps, GroupBase } from 'react-select';
+import Select, { CSSObjectWithLabel, GroupBase, OptionProps } from 'react-select';
 
-// export default function CustomSelect() {
-//   return (
-//     <Select
-//       styles={{
-//         control: (baseStyles, state) => ({
-//           ...baseStyles,
-//           borderColor: state.isFocused ? 'grey' : 'red',
-//         }),
-//       }}
-//     />
-//   );
-// }
-
-export const CustomSelect = styled(Select).attrs({
+export default styled(Select).attrs({
   styles: {
     control: (baseStyles: CSSObjectWithLabel) => ({
       ...baseStyles,
@@ -28,7 +15,12 @@ export const CustomSelect = styled(Select).attrs({
     }),
     option: (
       baseStyles: CSSObjectWithLabel,
-      state: ControlProps<unknown, false, GroupBase<unknown>>
-    ) => ({}),
+      props: OptionProps<unknown, false, GroupBase<unknown>>
+    ) => ({
+      ...baseStyles,
+      cursor: 'pointer',
+      color: 'var(--colors-text)',
+      backgroundColor: props.isSelected ? 'var(--colors-background)' : 'var(--colors-ui-base)',
+    }),
   },
 })``;
