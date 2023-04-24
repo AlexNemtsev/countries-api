@@ -32,6 +32,7 @@ const Input = styled.input.attrs({
   outline: none;
   margin-left: 2rem;
   color: var(--colors-text);
+  background-color: var(--colors-ui-base);
 `;
 
 export default function Search({ search, setSearch }: SearchProps) {
