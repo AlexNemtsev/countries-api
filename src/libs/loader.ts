@@ -1,5 +1,13 @@
 import { CountryData } from '../interfaces/country-data';
 
+const baseUrl = 'https://restcountries.com/v3.1/';
+
+const getAllCountries = async (): Promise<CountryData[]> => {
+  const url = baseUrl + 'all?fields=name,capital,flags,population,region';
+  const response = await fetch(url, { method: 'GET' });
+  return (await response.json()) as CountryData[];
+};
+
 class Loader {
   private static baseUrl = 'https://restcountries.com/v3.1/';
 
@@ -18,4 +26,4 @@ class Loader {
   }
 }
 
-export default Loader;
+export { getAllCountries };

@@ -1,4 +1,4 @@
-import Loader from '../libs/loader';
+import { getAllCountries } from '../libs/loader';
 import Card from '../components/Card';
 import Controls from '../components/Controls';
 import List from '../components/List';
@@ -29,7 +29,7 @@ const HomePage = ({ countries, setCountries }: HomePageProps) => {
 
   useEffect(() => {
     if (!countries.length) {
-      Loader.getAllCountries().then((data) => {
+      getAllCountries().then((data) => {
         setCountries(data);
         setFilteredCountries(data);
       });
