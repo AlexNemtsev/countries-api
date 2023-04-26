@@ -1,11 +1,15 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const Wrapper = styled.article`
+const Wrapper = styled(Link)`
+  display: block;
   border-radius: var(--radius);
   background-color: var(--colors-ui-base);
   box-shadow: var(--shadow);
   cursor: pointer;
   overflow: hidden;
+  text-decoration: none;
+  color: var(--colors-text);
 `;
 
 const CardImg = styled.img`
@@ -48,12 +52,11 @@ interface CardProps {
   img: string;
   name: string;
   info: CountryInfo[];
-  onClick: React.MouseEventHandler<HTMLElement>;
 }
 
-const Card = ({ img, name, info = [], onClick }: CardProps) => {
+const Card = ({ img, name, info = [] }: CardProps) => {
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper to={'/country/' + name}>
       <CardImg src={img} alt={name} />
       <CardBody>
         <CardTitle>{name}</CardTitle>

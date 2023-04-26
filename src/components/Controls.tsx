@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Search from './Search';
 import CustomSelect from './CustomSelect';
@@ -6,6 +6,10 @@ import CustomSelect from './CustomSelect';
 interface Option {
   value: string;
   label: string;
+}
+
+interface ControlsProps {
+  onSearch: (search: string, region: string) => void;
 }
 
 const Wrapper = styled.div`
@@ -28,9 +32,15 @@ const options: Option[] = [
   { value: 'Oceania', label: 'Oceania' },
 ];
 
-export default function Controls() {
+const Controls = ({ onSearch }: ControlsProps) => {
   const [search, setSearch] = useState('');
-  const [region, setRegion] = useState('second');
+  const [region, setRegion] = useState<Option>();
+
+  useEffect(() => {
+    const regionValue = region?.value || '';
+    onSearch(search, regionValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search, region]);
 
   return (
     <Wrapper>
@@ -41,8 +51,12 @@ export default function Controls() {
         isClearable
         isSearchable={false}
         value={region}
-        // onChange={setRegion}
+        onChange={(newValue) => {
+          setRegion(newValue as Option);
+        }}
       />
     </Wrapper>
   );
-}
+};
+
+export default Controls;
