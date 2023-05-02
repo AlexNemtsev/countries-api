@@ -17,13 +17,16 @@ type InfoProps = CountryInfo;
 
 export const Info = (props: InfoProps) => {
   const commonName = props.name.common;
-  const languages = Object.keys(props.languages);
-  const nativeName = props.name.nativeName[languages[0]].common;
-  const { flag, population, capital, region, subregion, tld, currencies, borders } = props;
+  const { flags, population, capital, region, subregion, tld, currencies, languages, borders } =
+    props;
+
+  const languagesList = Object.keys(languages);
+  const currenciesList = Object.keys(currencies);
+  const nativeName = props.name.nativeName[languagesList[0]].common;
 
   return (
     <Wrapper>
-      <InfoImage src={flag} alt={commonName} />
+      <InfoImage src={flags.svg} alt={flags.alt} />
       <div>
         <InfoTitle>{commonName}</InfoTitle>
         <ListGroup>
@@ -41,14 +44,21 @@ export const Info = (props: InfoProps) => {
               <b>Sub Region: </b> {subregion}
             </ListItem>
             <ListItem>
-              <b>Capital{capital.length > 1 ? 's' : ''}: </b>{' '}
-              {capital.length > 1 ? capital.join(', ') : capital[0]}
+              <b>Capital{capital.length > 1 ? 's' : ''}: </b> <span>{capital.join(', ')}</span>
             </ListItem>
           </List>
           <List>
             <ListItem>
               <b>Top Level Domain{tld.length > 1 ? 's' : ''}: </b>
-              {tld.length > 1 ? tld.join(', ') : tld[0]}
+              <span>{tld.join(', ')}</span>
+            </ListItem>
+            <ListItem>
+              <b>Currenc{currenciesList.length > 1 ? 'ies' : 'y'}: </b>
+              <span>{currenciesList.map((code) => currencies[code].name).join(', ')}</span>
+            </ListItem>
+            <ListItem>
+              <b>Languag{languagesList.length > 1 ? 'es' : 'e'}: </b>
+              <span>{languagesList.map((code) => languages[code]).join(', ')}</span>
             </ListItem>
           </List>
         </ListGroup>

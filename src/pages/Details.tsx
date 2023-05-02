@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { searchByCountry } from '../libs/loader';
 import { CountryInfo } from '../interfaces/country-info';
 import BackButton from '../components/BackButton';
+import { Info } from '../components/Info';
 
 const Details = () => {
   const { name } = useParams();
@@ -20,7 +21,7 @@ const Details = () => {
       <BackButton to="/">
         <IoArrowBack /> Back
       </BackButton>
-      Details {name}
+      {country && <Info {...country} />}
     </div>
   );
 };
