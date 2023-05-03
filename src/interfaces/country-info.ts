@@ -39,7 +39,7 @@ export interface CountryInfo {
   };
   latlng: number[];
   landlocked: boolean;
-  borders: string[];
+  borders?: string[];
   area: number;
   demonyms: {
     [key: string]: {

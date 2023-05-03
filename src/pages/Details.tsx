@@ -10,8 +10,6 @@ const Details = () => {
   const { name } = useParams();
   const [country, setCountry] = useState<CountryInfo>();
 
-  console.log(country);
-
   useEffect(() => {
     searchByCountry(name || '').then((data) => setCountry(data[0]));
   }, [name]);

@@ -1,17 +1,61 @@
 import styled from 'styled-components';
 import { CountryInfo } from '../interfaces/country-info';
 
-const Wrapper = styled.section``;
+const Wrapper = styled.section`
+  margin-top: 3rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 2rem;
 
-const InfoImage = styled.img``;
+  @media (min-width: 767px) {
+    grid-template-columns: minmax(100px, 400px) 1fr;
+    align-items: center;
+    gap: 5rem;
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: minmax(400px, 600px) 1fr;
+  }
+`;
 
-const InfoTitle = styled.h1``;
+const InfoImage = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+`;
 
-const ListGroup = styled.div``;
+const InfoTitle = styled.h1`
+  margin: 0;
+  font-weight: var(--fw-normal);
+`;
 
-const List = styled.ul``;
+const ListGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 
-const ListItem = styled.li``;
+  @media (min-width: 1024px) {
+    gap: 4rem;
+    flex-direction: row;
+  }
+`;
+
+const List = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+const ListItem = styled.li`
+  line-height: 1.8;
+`;
+
+const Meta = styled.div``;
+
+const TagGroup = styled.div``;
+
+const Tag = styled.span``;
 
 type InfoProps = CountryInfo;
 
@@ -62,6 +106,18 @@ export const Info = (props: InfoProps) => {
             </ListItem>
           </List>
         </ListGroup>
+        <Meta>
+          <b>Border countries: </b>
+          {!borders ? (
+            <span>There are no border countries</span>
+          ) : (
+            <TagGroup>
+              {borders.map((b) => (
+                <Tag key={b}>{b}</Tag>
+              ))}
+            </TagGroup>
+          )}
+        </Meta>
       </div>
     </Wrapper>
   );
