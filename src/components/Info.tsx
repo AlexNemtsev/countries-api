@@ -83,9 +83,7 @@ const Tag = styled(Link)`
   color: var(--colors-text);
 `;
 
-type InfoProps = CountryInfo;
-
-export const Info = (props: InfoProps) => {
+export const Info = (props: CountryInfo) => {
   const commonName = props.name.common;
   const { flags, population, capital, region, subregion, tld, currencies, languages, borders } =
     props;
@@ -126,10 +124,12 @@ export const Info = (props: InfoProps) => {
             </ListItem>
           </List>
           <List>
-            <ListItem>
-              <b>Top Level Domain{tld.length > 1 ? 's' : ''}: </b>
-              <span>{tld.join(', ')}</span>
-            </ListItem>
+            {tld && (
+              <ListItem>
+                <b>Top Level Domain{tld.length > 1 ? 's' : ''}: </b>
+                <span>{tld.join(', ')}</span>
+              </ListItem>
+            )}
             <ListItem>
               <b>Currenc{currenciesList.length > 1 ? 'ies' : 'y'}: </b>
               <span>{currenciesList.map((code) => currencies[code].name).join(', ')}</span>

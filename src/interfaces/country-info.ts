@@ -9,7 +9,7 @@ export interface CountryInfo {
       };
     };
   };
-  tld: string[];
+  tld?: string[];
   cca2: string;
   ccn3: string;
   cca3: string;
