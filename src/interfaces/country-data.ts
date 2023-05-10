@@ -1,5 +1,5 @@
 export interface CountryData {
-  capital: 'string';
+  capital: string[];
   flags: {
     png: string;
     svg: string;

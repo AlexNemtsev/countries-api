@@ -45,7 +45,7 @@ const CardListItem = styled.li`
 
 interface CountryInfo {
   title: string;
-  description: string;
+  description: string | string[];
 }
 
 interface CardProps {
@@ -63,7 +63,8 @@ const Card = ({ img, name, info = [] }: CardProps) => {
         <CardList>
           {info.map((el) => (
             <CardListItem key={el.title}>
-              <b>{el.title}:</b> {el.description}
+              <b>{el.title}:</b>{' '}
+              {typeof el.description === 'string' ? el.description : el.description.join(', ')}
             </CardListItem>
           ))}
         </CardList>

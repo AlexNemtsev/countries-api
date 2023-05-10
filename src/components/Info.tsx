@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { CountryInfo } from '../interfaces/country-info';
 import { useState, useEffect } from 'react';
 import { filterByCodes } from '../libs/loader';
@@ -72,12 +73,14 @@ const TagGroup = styled.div`
   flex-wrap: wrap;
 `;
 
-const Tag = styled.span`
+const Tag = styled(Link)`
   padding: 0 1rem;
   background-color: var(--colors-ui-base);
   box-shadow: var(--shadow);
   line-height: 1.5;
   cursor: pointer;
+  text-decoration: none;
+  color: var(--colors-text);
 `;
 
 type InfoProps = CountryInfo;
@@ -91,7 +94,7 @@ export const Info = (props: InfoProps) => {
   const currenciesList = Object.keys(currencies);
   const nativeName = props.name.nativeName[languagesList[0]].common;
 
-  const [neighbours, setNeighbours] = useState<string[]>();
+  const [neighbours, setNeighbours] = useState<string[]>([]);
 
   useEffect(() => {
     if (borders) {
@@ -139,12 +142,14 @@ export const Info = (props: InfoProps) => {
         </ListGroup>
         <Meta>
           <b>Border countries: </b>
-          {!borders ? (
+          {!neighbours.length ? (
             <span>There are no border countries</span>
           ) : (
             <TagGroup>
-              {neighbours.map((b) => (
-                <Tag key={b}>{b}</Tag>
+              {neighbours.map((border) => (
+                <Tag key={border} to={'/country/' + border}>
+                  {border}
+                </Tag>
               ))}
             </TagGroup>
           )}
