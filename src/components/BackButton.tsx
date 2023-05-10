@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const BackButton = styled(Link)`
+const BackButton = styled.button`
   padding: 0 1rem;
   background-color: var(--colors-ui-base);
   box-shadow: var(--shadow);
@@ -13,6 +12,9 @@ const BackButton = styled(Link)`
   color: var(--color-text);
   text-decoration: none;
   width: 96px;
+  border: none;
+  outline: none;
+  cursor: pointer;
 `;
 
 export default BackButton;

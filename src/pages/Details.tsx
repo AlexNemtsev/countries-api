@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { IoArrowBack } from 'react-icons/io5';
 import { useState, useEffect } from 'react';
 import { searchByCountry } from '../libs/loader';
@@ -9,6 +9,7 @@ import { Info } from '../components/Info';
 const Details = () => {
   const { name } = useParams();
   const [country, setCountry] = useState<CountryInfo>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     searchByCountry(name || '').then((data) => setCountry(data[0]));
@@ -16,7 +17,7 @@ const Details = () => {
 
   return (
     <div>
-      <BackButton to="/">
+      <BackButton onClick={() => navigate(-1)}>
         <IoArrowBack /> Back
       </BackButton>
       {country && <Info {...country} />}
