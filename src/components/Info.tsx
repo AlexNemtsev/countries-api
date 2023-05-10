@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { CountryInfo } from '../interfaces/country-info';
+import { useState, useEffect } from 'react';
+import { filterByCodes } from '../libs/loader';
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -51,11 +53,32 @@ const ListItem = styled.li`
   line-height: 1.8;
 `;
 
-const Meta = styled.div``;
+const Meta = styled.div`
+  margin-top: 3rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+  align-items: flex-start;
 
-const TagGroup = styled.div``;
+  @media (min-width: 767px) {
+    flex-direction: row;
+    align-items: center;
+  }
+`;
 
-const Tag = styled.span``;
+const TagGroup = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+`;
+
+const Tag = styled.span`
+  padding: 0 1rem;
+  background-color: var(--colors-ui-base);
+  box-shadow: var(--shadow);
+  line-height: 1.5;
+  cursor: pointer;
+`;
 
 type InfoProps = CountryInfo;
 
@@ -67,6 +90,14 @@ export const Info = (props: InfoProps) => {
   const languagesList = Object.keys(languages);
   const currenciesList = Object.keys(currencies);
   const nativeName = props.name.nativeName[languagesList[0]].common;
+
+  const [neighbours, setNeighbours] = useState<string[]>();
+
+  useEffect(() => {
+    if (borders) {
+      filterByCodes(borders).then((data) => setNeighbours(data.map((c) => c.name.common)));
+    }
+  }, [borders]);
 
   return (
     <Wrapper>
@@ -112,7 +143,7 @@ export const Info = (props: InfoProps) => {
             <span>There are no border countries</span>
           ) : (
             <TagGroup>
-              {borders.map((b) => (
+              {neighbours.map((b) => (
                 <Tag key={b}>{b}</Tag>
               ))}
             </TagGroup>

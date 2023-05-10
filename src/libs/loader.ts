@@ -15,12 +15,10 @@ const searchByCountry = async (name: string): Promise<CountryInfo[]> => {
   return (await response.json()) as CountryInfo[];
 };
 
-class Loader {
-  private static baseUrl = 'https://restcountries.com/v3.1/';
+const filterByCodes = async (codes: string[]): Promise<Pick<CountryInfo, 'name'>[]> => {
+  const url = baseUrl + 'alpha?codes=' + codes.join(',') + '&fields=name';
+  const response = await fetch(url, { method: 'GET' });
+  return (await response.json()) as Pick<CountryInfo, 'name'>[];
+};
 
-  static filterByCodes(codes: string[]) {
-    const url = Loader.baseUrl + 'alpha?codes=' + codes.join(',');
-  }
-}
-
-export { getAllCountries, searchByCountry };
+export { getAllCountries, searchByCountry, filterByCodes };
