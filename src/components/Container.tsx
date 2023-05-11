@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styles from './Container.module.scss';
 
-export const Container = styled.div`
-  width: 100%;
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 2rem;
-`;
+interface ContainerProps {
+  children?: React.ReactNode;
+}
+
+export const Container = ({ children }: ContainerProps) => {
+  return <div className={styles.container}>{children}</div>;
+};

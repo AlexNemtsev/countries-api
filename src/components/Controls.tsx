@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import Search from './Search';
-import CustomSelect from './CustomSelect';
+import styles from './Controls.module.scss';
+import { Search } from './Search';
+import Select, { CSSObjectWithLabel, StylesConfig } from 'react-select';
 
 interface Option {
   value: string;
@@ -12,17 +12,25 @@ interface ControlsProps {
   onSearch: (search: string, region: string) => void;
 }
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  @media (min-width: 767px) {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-`;
+const colourStyles: StylesConfig<Option> = {
+  control: (baseStyles: CSSObjectWithLabel) => ({
+    ...baseStyles,
+    backgroundColor: 'var(--colors-ui-base)',
+    color: 'var(--colors-text)',
+    borderRadius: 'var(--radius)',
+    padding: '0.25rem',
+    border: 'none',
+    boxShadow: 'var(--shadow)',
+    height: '50px',
+    cursor: 'pointer',
+  }),
+  option: (baseStyles, props) => ({
+    ...baseStyles,
+    cursor: 'pointer',
+    color: 'var(--colors-text)',
+    backgroundColor: props.isSelected ? 'var(--colors-background)' : 'var(--colors-ui-base)',
+  }),
+};
 
 const options: Option[] = [
   { value: 'Africa', label: 'Africa' },
@@ -32,7 +40,7 @@ const options: Option[] = [
   { value: 'Oceania', label: 'Oceania' },
 ];
 
-const Controls = ({ onSearch }: ControlsProps) => {
+export const Controls = ({ onSearch }: ControlsProps) => {
   const [search, setSearch] = useState('');
   const [region, setRegion] = useState<Option>();
 
@@ -43,9 +51,11 @@ const Controls = ({ onSearch }: ControlsProps) => {
   }, [search, region]);
 
   return (
-    <Wrapper>
+    <div className={styles.wrapper}>
       <Search search={search} setSearch={setSearch} />
-      <CustomSelect
+      <Select
+        className={styles.select}
+        styles={colourStyles}
         options={options}
         placeholder="Filter by Region"
         isClearable
@@ -55,8 +65,6 @@ const Controls = ({ onSearch }: ControlsProps) => {
           setRegion(newValue as Option);
         }}
       />
-    </Wrapper>
+    </div>
   );
 };
-
-export default Controls;
