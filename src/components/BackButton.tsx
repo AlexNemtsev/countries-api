@@ -12,5 +12,3 @@ export const BackButton = ({ children, onClick }: BackButtonProps) => {
     </button>
   );
 };
-
-export default BackButton;

@@ -1,6 +1,6 @@
 import { getAllCountries } from '../libs/loader';
-import Card from '../components/Card';
-import Controls from '../components/Controls';
+import { Card } from '../components/Card';
+import { Controls } from '../components/Controls';
 import List from '../components/List';
 import { CountryData } from '../interfaces/country-data';
 import { useEffect, useState } from 'react';

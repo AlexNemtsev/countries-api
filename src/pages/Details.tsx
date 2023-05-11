@@ -3,7 +3,7 @@ import { IoArrowBack } from 'react-icons/io5';
 import { useState, useEffect } from 'react';
 import { searchByCountry } from '../libs/loader';
 import { CountryInfo } from '../interfaces/country-info';
-import BackButton from '../components/BackButton';
+import { BackButton } from '../components/BackButton';
 import { Info } from '../components/Info';
 
 const Details = () => {
