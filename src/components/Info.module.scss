@@ -11,7 +11,7 @@
     gap: 5rem;
   }
   @media (min-width: 1024px) {
-    grid-template-columns: minmax(400px, 600px) 1fr;
+    grid-template-columns: minmax(400px, 540px) 1fr;
   }
 }
 
@@ -23,8 +23,7 @@
 }
 
 .infoTitle {
-  margin: 0;
-  font-weight: var(--fw-normal);
+  margin-top: 0;
 }
 
 .listGroup {
@@ -74,4 +73,8 @@
   line-height: 1.5;
   text-decoration: none;
   color: var(--colors-text);
+}
+
+div b {
+  font-weight: var(--fw-normal);
 }
