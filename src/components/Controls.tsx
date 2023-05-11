@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './Controls.module.scss';
 import Search from './Search';
-import CustomSelect from './CustomSelect';
+import Select, { CSSObjectWithLabel, StylesConfig } from 'react-select';
 
 interface Option {
   value: string;
@@ -11,6 +11,26 @@ interface Option {
 interface ControlsProps {
   onSearch: (search: string, region: string) => void;
 }
+
+const colourStyles: StylesConfig<Option> = {
+  control: (baseStyles: CSSObjectWithLabel) => ({
+    ...baseStyles,
+    backgroundColor: 'var(--colors-ui-base)',
+    color: 'var(--colors-text)',
+    borderRadius: 'var(--radius)',
+    padding: '0.25rem',
+    border: 'none',
+    boxShadow: 'var(--shadow)',
+    height: '50px',
+    cursor: 'pointer',
+  }),
+  option: (baseStyles, props) => ({
+    ...baseStyles,
+    cursor: 'pointer',
+    color: 'var(--colors-text)',
+    backgroundColor: props.isSelected ? 'var(--colors-background)' : 'var(--colors-ui-base)',
+  }),
+};
 
 const options: Option[] = [
   { value: 'Africa', label: 'Africa' },
@@ -33,7 +53,9 @@ export const Controls = ({ onSearch }: ControlsProps) => {
   return (
     <div className={styles.wrapper}>
       <Search search={search} setSearch={setSearch} />
-      <CustomSelect
+      <Select
+        className={styles.select}
+        styles={colourStyles}
         options={options}
         placeholder="Filter by Region"
         isClearable
