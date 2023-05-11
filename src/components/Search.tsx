@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styles from './Search.module.scss';
 
 import { IoSearch } from 'react-icons/io5';
 
@@ -7,39 +7,17 @@ interface SearchProps {
   setSearch: (value: string) => void;
 }
 
-const InputContainer = styled.label`
-  background-color: var(--colors-ui-base);
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  width: 100%;
-  margin-bottom: 1.5rem;
-
-  @media (min-width: 767px) {
-    margin-bottom: 0;
-    width: 280px;
-  }
-`;
-
-const Input = styled.input.attrs({
-  type: 'input',
-  placeholder: 'Search for a country...',
-})`
-  border: none;
-  outline: none;
-  margin-left: 2rem;
-  color: var(--colors-text);
-  background-color: var(--colors-ui-base);
-`;
-
-export default function Search({ search, setSearch }: SearchProps) {
+export const Search = ({ search, setSearch }: SearchProps) => {
   return (
-    <InputContainer>
+    <label className={styles.label}>
       <IoSearch />
-      <Input onChange={(e) => setSearch(e.target.value)} value={search} />
-    </InputContainer>
+      <input
+        className={styles.input}
+        type="input"
+        placeholder="Search for a country..."
+        onChange={(e) => setSearch(e.target.value)}
+        value={search}
+      />
+    </label>
   );
-}
+};

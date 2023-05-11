@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './Controls.module.scss';
-import Search from './Search';
+import { Search } from './Search';
 import Select, { CSSObjectWithLabel, StylesConfig } from 'react-select';
 
 interface Option {
